@@ -1,0 +1,631 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 6.2.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon32.ico">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon16.ico">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"example.com","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":true},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
+  </script>
+
+  <meta name="description" content="十二、Scanner-键盘录入数据我们可以通过 Scanner 类来获取用户的键盘录入的数据。 1. 使用步骤由于目前相关语法还没学习，所以先把步骤记住。后面学习了相关语法再来讲解。 1、导包。在定义类的上面写上下面的语句。 1import java.util.Scanner;   2、创建对象 1Scanner sc &#x3D; new Scanner(System.in);  3、接收用户录入的数据并">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Scanner,运算符">
+<meta property="og:url" content="http://example.com/2020/02/01/Scanner-%E8%BF%90%E7%AE%97%E7%AC%A6/index.html">
+<meta property="og:site_name" content="Crush&#39;s Blog">
+<meta property="og:description" content="十二、Scanner-键盘录入数据我们可以通过 Scanner 类来获取用户的键盘录入的数据。 1. 使用步骤由于目前相关语法还没学习，所以先把步骤记住。后面学习了相关语法再来讲解。 1、导包。在定义类的上面写上下面的语句。 1import java.util.Scanner;   2、创建对象 1Scanner sc &#x3D; new Scanner(System.in);  3、接收用户录入的数据并">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2020-02-01T10:29:13.000Z">
+<meta property="article:modified_time" content="2022-06-09T11:14:47.907Z">
+<meta property="article:author" content="Tony Stark">
+<meta property="article:tag" content="java">
+<meta name="twitter:card" content="summary">
+
+<link rel="canonical" href="http://example.com/2020/02/01/Scanner-%E8%BF%90%E7%AE%97%E7%AC%A6/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title>Scanner,运算符 | Crush's Blog</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">Crush's Blog</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">越努力，越幸运！</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签<span class="badge">7</span></a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类<span class="badge">8</span></a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档<span class="badge">25</span></a>
+
+  </li>
+  </ul>
+</nav>
+
+
+
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2020/02/01/Scanner-%E8%BF%90%E7%AE%97%E7%AC%A6/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.jpg">
+      <meta itemprop="name" content="Tony Stark">
+      <meta itemprop="description" content="程序员小新儿">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Crush's Blog">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          Scanner,运算符
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2020-02-01 18:29:13" itemprop="dateCreated datePublished" datetime="2020-02-01T18:29:13+08:00">2020-02-01</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2022-06-09 19:14:47" itemprop="dateModified" datetime="2022-06-09T19:14:47+08:00">2022-06-09</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Java%E5%9F%BA%E7%A1%80/" itemprop="url" rel="index"><span itemprop="name">Java基础</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h1 id="十二、Scanner-键盘录入数据"><a href="#十二、Scanner-键盘录入数据" class="headerlink" title="十二、Scanner-键盘录入数据"></a>十二、Scanner-键盘录入数据</h1><p>我们可以通过 Scanner 类来获取用户的键盘录入的数据。</p>
+<h2 id="1-使用步骤"><a href="#1-使用步骤" class="headerlink" title="1. 使用步骤"></a>1. 使用步骤</h2><p>由于目前相关语法还没学习，所以先把步骤记住。后面学习了相关语法再来讲解。</p>
+<p>1、导包。在定义类的上面写上下面的语句。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> java.util.Scanner; </span><br></pre></td></tr></table></figure>
+
+<p>2、创建对象</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">Scanner</span> <span class="variable">sc</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">Scanner</span>(System.in);</span><br></pre></td></tr></table></figure>
+
+<p>3、接收用户录入的数据并存储</p>
+ <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">int</span> <span class="variable">num</span> <span class="operator">=</span> sc.nextInt(); <span class="comment">// 表示将键盘录入的值作为int数返回。</span></span><br></pre></td></tr></table></figure>
+
+<p>演示：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//导包</span></span><br><span class="line"><span class="keyword">import</span> java.util.Scanner;</span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">ScannerDemo</span> &#123;</span><br><span class="line">	<span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span> &#123;</span><br><span class="line">		<span class="comment">//创建对象</span></span><br><span class="line">		<span class="type">Scanner</span> <span class="variable">sc</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">Scanner</span>(System.in);</span><br><span class="line">		<span class="comment">//接收数据</span></span><br><span class="line">		<span class="type">int</span> <span class="variable">x</span> <span class="operator">=</span> sc.nextInt();</span><br><span class="line">		<span class="comment">//输出数据</span></span><br><span class="line">		System.out.println(x);</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h1 id="十三、运算符"><a href="#十三、运算符" class="headerlink" title="十三、运算符"></a>十三、运算符</h1><p>运算符： 用来在编程过中对各种数据进行处理运算的符号 </p>
+<h2 id="1-算术运行符"><a href="#1-算术运行符" class="headerlink" title="1. 算术运行符"></a>1. 算术运行符</h2><p>其实就是常见的数学运行符，不过有些地方有点不同</p>
+<table>
+<thead>
+<tr>
+<th>符号</th>
+<th>作用</th>
+<th align="center">不同之处</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>+</td>
+<td>加</td>
+<td align="center">单纯使用数字参与运算的时候和数学中的+没有不同</td>
+</tr>
+<tr>
+<td>-</td>
+<td>减</td>
+<td align="center">无</td>
+</tr>
+<tr>
+<td>*</td>
+<td>乘</td>
+<td align="center">无</td>
+</tr>
+<tr>
+<td>&#x2F;</td>
+<td>除</td>
+<td align="center">整数相除只能得到整数,如果想得到小数必须使用小数参与计算    例如:    int num &#x3D; 10&#x2F;3； &#x2F;&#x2F;num的值为3而不会是3.333</td>
+</tr>
+<tr>
+<td>%</td>
+<td>取余</td>
+<td align="center">获取的是两个数据做整除后得到的余数  int num &#x3D; 10%3;</td>
+</tr>
+</tbody></table>
+<p>如果字符参与了运算：</p>
+<p>​	char类型参与算术运算，会把字符转换成对应的数字（参照 <a href="img%5Cimage-20200815160249620.png">ASCII 码表</a>）然后参与运算。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">char</span> <span class="variable">c</span> <span class="operator">=</span> <span class="string">&#x27;A&#x27;</span>;</span><br><span class="line">System.out.println(c+<span class="number">0</span>); </span><br></pre></td></tr></table></figure>
+
+
+
+<p>如果字符串参与了+运算：	</p>
+<p>​	当“+”操作中出现字符串时，这个”+”是会进行字符串的拼接，而不会进行数据的计算</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">System.out.println(<span class="string">&quot;夜半三更三更看了&quot;</span>+<span class="number">3</span>+<span class="string">&quot;遍小白船&quot;</span>); <span class="comment">// 夜半三更三更看了3遍小白船</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="1-1-练习"><a href="#1-1-练习" class="headerlink" title="1.1 练习"></a>1.1 练习</h3><p>1.尝试定义3个变量分别存储语文，数学，英语的分数，使用键盘输入的方式让用户输入对应的分数。然后去打印总分和平均分。</p>
+<p>2.判断下面代码的执行结果</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">System.out.println(<span class="string">&#x27;a&#x27;</span>+<span class="number">10</span>+<span class="string">&quot;bc&quot;</span>+<span class="string">&#x27;d&#x27;</span>+<span class="number">10</span>);<span class="comment">//107bcd10</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="2-赋值运算符"><a href="#2-赋值运算符" class="headerlink" title="2. 赋值运算符"></a>2. 赋值运算符</h2><p>可以用来修改变量的值。赋值运行符左边写要被修改值的变量名，右边写参与计算的值,这个值可以是具体的值也可以是变量。</p>
+<table>
+<thead>
+<tr>
+<th>符号</th>
+<th>功能</th>
+<th>举例</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>&#x3D;</td>
+<td>赋值</td>
+<td>a&#x3D;10，将10赋值给变量a</td>
+</tr>
+<tr>
+<td>+&#x3D;</td>
+<td>加后赋值</td>
+<td>a+&#x3D;10;  &#x2F;&#x2F;相当于a &#x3D;(a的数据类型) (a + 10);</td>
+</tr>
+<tr>
+<td>-&#x3D;</td>
+<td>减后赋值</td>
+<td>a-&#x3D;b;&#x2F;&#x2F;相当于a &#x3D;(a的数据类型) (a - b);</td>
+</tr>
+<tr>
+<td>*&#x3D;</td>
+<td>乘后赋值</td>
+<td>a*&#x3D;b;&#x2F;&#x2F;相当于a &#x3D;(a的数据类型) (a * b);</td>
+</tr>
+<tr>
+<td>&#x2F;&#x3D;</td>
+<td>除后赋值</td>
+<td>a&#x2F;&#x3D;b;&#x2F;&#x2F;相当于a &#x3D;(a的数据类型) (a &#x2F; b);</td>
+</tr>
+<tr>
+<td>%&#x3D;</td>
+<td>取余后赋值</td>
+<td>a%&#x3D;b;&#x2F;&#x2F;相当于a &#x3D;(a的数据类型) (a % b);</td>
+</tr>
+</tbody></table>
+<h2 id="3-自增自减运算符"><a href="#3-自增自减运算符" class="headerlink" title="3. 自增自减运算符"></a>3. 自增自减运算符</h2><table>
+<thead>
+<tr>
+<th>符号</th>
+<th>作用</th>
+<th>举例</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>++</td>
+<td>自增</td>
+<td>a++;&#x2F;&#x2F;相当于a &#x3D; a+1;</td>
+</tr>
+<tr>
+<td>–</td>
+<td>自减</td>
+<td>a–;&#x2F;&#x2F;相当于a &#x3D; a - 1;</td>
+</tr>
+</tbody></table>
+<p><strong>注意:</strong></p>
+<p>​	++和–可以写在变量的前面也可以写在变量的后面,单独写的时候写前面写后面都没有区别.区别就在和其它运算符一起写.<br>​	++<strong>写在变量前</strong>的时候<strong>先自增</strong>然后再参与其他运算<br>​	++<strong>写在变量后面</strong>的时候先参与其它运算<strong>后自增</strong></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">Demo03</span> &#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span> &#123;</span><br><span class="line">        <span class="type">int</span> <span class="variable">a</span> <span class="operator">=</span> <span class="number">10</span>;</span><br><span class="line">        <span class="type">int</span> <span class="variable">b</span> <span class="operator">=</span> <span class="number">10</span>;</span><br><span class="line">        <span class="type">int</span> <span class="variable">c</span> <span class="operator">=</span> a++;</span><br><span class="line">        <span class="type">int</span> <span class="variable">d</span> <span class="operator">=</span> ++b;</span><br><span class="line">        System.out.println(a);</span><br><span class="line">        System.out.println(b);</span><br><span class="line">        System.out.println(c);</span><br><span class="line">        System.out.println(d);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>​	<strong>爬山警告：如果想让领导带你去爬山的话，在公司中写代码的时候可以把自增自减运算符和其他运行放在一起使用。</strong></p>
+<p>例如：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">int</span> <span class="variable">a</span> <span class="operator">=</span> <span class="number">5</span>;</span><br><span class="line">      <span class="type">int</span> <span class="variable">c</span> <span class="operator">=</span> <span class="number">10</span>;</span><br><span class="line">      <span class="type">int</span> <span class="variable">b</span> <span class="operator">=</span> <span class="number">20</span>;</span><br><span class="line">      <span class="type">int</span> <span class="variable">d</span> <span class="operator">=</span> ++a+b+++c+++(a+b);</span><br><span class="line">      System.out.println(d);</span><br></pre></td></tr></table></figure>
+
+<h2 id="4-比较运算符"><a href="#4-比较运算符" class="headerlink" title="4. 比较运算符"></a>4. 比较运算符</h2><p>让计算机帮我们去比较数值之间的关系是否正确。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">==  比较左右两边是否相等,结果是布尔类型的</span><br><span class="line">&lt;    比较左边是否小于右边,结果是布尔类型</span><br><span class="line">&gt;    比较左边是否大于右边,结果是布尔类型</span><br><span class="line">&lt;=  比较左边是否小于等于右边,结果是布尔类型</span><br><span class="line">&gt;=  比较左边是否大于等于右边,结果是布尔类型</span><br><span class="line">!=  比较左右两边是否不相等,如果不相等结果是<span class="literal">true</span>,否则是<span class="literal">false</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="5-逻辑运算符"><a href="#5-逻辑运算符" class="headerlink" title="5. 逻辑运算符"></a>5. 逻辑运算符</h2><table>
+<thead>
+<tr>
+<th>符号</th>
+<th>作用</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>&amp;</td>
+<td>逻辑与</td>
+<td>理解成并且的意思，左右两边都要为真才为真</td>
+</tr>
+<tr>
+<td>|</td>
+<td>逻辑或</td>
+<td>理解成或者的意思，左右两边只要有一个为真就为真</td>
+</tr>
+<tr>
+<td>^</td>
+<td>逻辑异或</td>
+<td>左右两边不同结果才为真</td>
+</tr>
+<tr>
+<td>!</td>
+<td>逻辑非</td>
+<td>取反</td>
+</tr>
+<tr>
+<td>&amp;&amp;</td>
+<td>短路与</td>
+<td>作用和&amp;相同，但是有短路效果</td>
+</tr>
+<tr>
+<td>||</td>
+<td>短路或</td>
+<td>作用和|相同，但是有短路效果</td>
+</tr>
+</tbody></table>
+<p>你听懂了这个知识点  或者  你没听懂这个知识点</p>
+<p>你是女生并且你是男生</p>
+<p>短路效果：左边表达式的结果确定之后,如果整个表达式的结果已经被确定了,就不会去执行右边的表达式</p>
+<p>例如：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">int</span> <span class="variable">x</span> <span class="operator">=</span> <span class="number">10</span>;</span><br><span class="line"><span class="type">int</span> <span class="variable">y</span> <span class="operator">=</span> <span class="number">15</span>;</span><br><span class="line"><span class="comment">//System.out.println((x++ &gt; 4) | (y++ &gt; 5)); // 两个表达都会运算</span></span><br><span class="line">System.out.println((x++ &gt; <span class="number">4</span>) || (y++ &gt; <span class="number">5</span>)); <span class="comment">// 左边已经可以确定结果为false，右边不参与运算</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="6-三元运算符"><a href="#6-三元运算符" class="headerlink" title="6. 三元运算符"></a>6. 三元运算符</h2><h3 id="6-1-格式"><a href="#6-1-格式" class="headerlink" title="6.1 格式"></a>6.1 格式</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">布尔表达式?表达式<span class="number">1</span>:表达式<span class="number">2</span>;</span><br></pre></td></tr></table></figure>
+
+<h3 id="6-2-执行流程"><a href="#6-2-执行流程" class="headerlink" title="6.2 执行流程"></a>6.2 执行流程</h3><p>​		先判断布尔表达式的结果,如果结果为true三元表达式的结果就是表达式1的值,否则就是表达式2的值。因为肯定会有一个结果。所以我们在使用的时候需要把这个结果使用(用变量保存，打印等)起来。不然就没有意义。</p>
+<p>例如：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">int</span> <span class="variable">a</span> <span class="operator">=</span> <span class="number">10</span>;</span><br><span class="line"><span class="type">int</span> <span class="variable">b</span> <span class="operator">=</span> <span class="number">20</span>;</span><br><span class="line"><span class="type">int</span> <span class="variable">result</span> <span class="operator">=</span> a==b?a:b;</span><br><span class="line">System.out.println(result);</span><br></pre></td></tr></table></figure>
+
+<h3 id="6-3-练习"><a href="#6-3-练习" class="headerlink" title="6.3 练习"></a>6.3 练习</h3><p>1.键盘录入两个数，求两个数中的最大值并打印</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span> &#123;</span><br><span class="line"><span class="comment">//        键盘录入两个数，求两个数中的最大值并打印</span></span><br><span class="line">        <span class="comment">//键盘录入2个数</span></span><br><span class="line">        <span class="type">Scanner</span> <span class="variable">sc</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">Scanner</span>(System.in);</span><br><span class="line">        System.out.println(<span class="string">&quot;请输入第一个数&quot;</span>);</span><br><span class="line">        <span class="type">int</span> <span class="variable">a</span> <span class="operator">=</span> sc.nextInt();</span><br><span class="line">        System.out.println(<span class="string">&quot;请输入第二个数&quot;</span>);</span><br><span class="line">        <span class="type">int</span> <span class="variable">b</span> <span class="operator">=</span> sc.nextInt();</span><br><span class="line">        <span class="comment">//判断a&gt;b嘛  ，如果成立 最大值就是a  负责就是b</span></span><br><span class="line">        <span class="type">int</span> <span class="variable">result</span> <span class="operator">=</span> a&gt;b?a:b;</span><br><span class="line">        System.out.println(<span class="string">&quot;最大值为&quot;</span>+result);</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/java/" rel="tag"># java</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2020/02/01/%E5%8F%98%E9%87%8F-%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B%E8%BD%AC%E6%8D%A2-%E6%A0%87%E8%AF%86%E7%AC%A6/" rel="prev" title="变量,数据类型转换,标识符">
+      <i class="fa fa-chevron-left"></i> 变量,数据类型转换,标识符
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2020/02/01/%E6%B5%81%E7%A8%8B%E6%8E%A7%E5%88%B6%E8%AF%AD%E5%8F%A5%EF%BC%88if-switch%EF%BC%89/" rel="next" title="流程控制语句（if,switch）">
+      流程控制语句（if,switch） <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%8D%81%E4%BA%8C%E3%80%81Scanner-%E9%94%AE%E7%9B%98%E5%BD%95%E5%85%A5%E6%95%B0%E6%8D%AE"><span class="nav-number">1.</span> <span class="nav-text">十二、Scanner-键盘录入数据</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-%E4%BD%BF%E7%94%A8%E6%AD%A5%E9%AA%A4"><span class="nav-number">1.1.</span> <span class="nav-text">1. 使用步骤</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%8D%81%E4%B8%89%E3%80%81%E8%BF%90%E7%AE%97%E7%AC%A6"><span class="nav-number">2.</span> <span class="nav-text">十三、运算符</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-%E7%AE%97%E6%9C%AF%E8%BF%90%E8%A1%8C%E7%AC%A6"><span class="nav-number">2.1.</span> <span class="nav-text">1. 算术运行符</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-1-%E7%BB%83%E4%B9%A0"><span class="nav-number">2.1.1.</span> <span class="nav-text">1.1 练习</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-%E8%B5%8B%E5%80%BC%E8%BF%90%E7%AE%97%E7%AC%A6"><span class="nav-number">2.2.</span> <span class="nav-text">2. 赋值运算符</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-%E8%87%AA%E5%A2%9E%E8%87%AA%E5%87%8F%E8%BF%90%E7%AE%97%E7%AC%A6"><span class="nav-number">2.3.</span> <span class="nav-text">3. 自增自减运算符</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4-%E6%AF%94%E8%BE%83%E8%BF%90%E7%AE%97%E7%AC%A6"><span class="nav-number">2.4.</span> <span class="nav-text">4. 比较运算符</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#5-%E9%80%BB%E8%BE%91%E8%BF%90%E7%AE%97%E7%AC%A6"><span class="nav-number">2.5.</span> <span class="nav-text">5. 逻辑运算符</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#6-%E4%B8%89%E5%85%83%E8%BF%90%E7%AE%97%E7%AC%A6"><span class="nav-number">2.6.</span> <span class="nav-text">6. 三元运算符</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#6-1-%E6%A0%BC%E5%BC%8F"><span class="nav-number">2.6.1.</span> <span class="nav-text">6.1 格式</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#6-2-%E6%89%A7%E8%A1%8C%E6%B5%81%E7%A8%8B"><span class="nav-number">2.6.2.</span> <span class="nav-text">6.2 执行流程</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#6-3-%E7%BB%83%E4%B9%A0"><span class="nav-number">2.6.3.</span> <span class="nav-text">6.3 练习</span></a></li></ol></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Tony Stark"
+      src="/images/avatar.jpg">
+  <p class="site-author-name" itemprop="name">Tony Stark</p>
+  <div class="site-description" itemprop="description">程序员小新儿</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">25</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">8</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">7</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/Crush0321" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;Crush0321" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://weibo.com/Crush_0321" title="Weibo → https:&#x2F;&#x2F;weibo.com&#x2F;Crush_0321" rel="noopener" target="_blank"><i class="fab fa-weibo fa-fw"></i>Weibo</a>
+      </span>
+  </div>
+
+
+  <div class="links-of-blogroll motion-element">
+    <div class="links-of-blogroll-title"><i class="fa fa-link fa-fw"></i>
+      Links
+    </div>
+    <ul class="links-of-blogroll-list">
+        <li class="links-of-blogroll-item">
+          <a href="https://blog.k8s.li/" title="https:&#x2F;&#x2F;blog.k8s.li&#x2F;" rel="noopener" target="_blank">Reimu's blog</a>
+        </li>
+    </ul>
+  </div>
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2022</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Tony Stark</span>
+</div>
+
+<!--隐藏网页底部 powered By Hexo / 强力驱动
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> 强力驱动
+  </div> -->
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+
+</body>
+</html>

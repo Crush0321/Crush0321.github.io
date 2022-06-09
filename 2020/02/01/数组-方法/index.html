@@ -1,0 +1,542 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 6.2.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon32.ico">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon16.ico">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"example.com","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":true},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
+  </script>
+
+  <meta name="description" content="二十、数组我们可以使用数组来保存同一个数据类型的多个数据 1. 数组的特点​		①数组的长度一旦确定就不能改变 ​		②一个数组中元素的数据类型都是一样的 2. 数组的初始化2.1 动态初始化2.1.1 格式​			数据类型[] 数组名 &#x3D; new 数据类型[长度]; 例如： 1int[] arr &#x3D; new int[10];&#x2F;&#x2F;动态初始化了一个长度为10的数组，数组元素为int类型">
+<meta property="og:type" content="article">
+<meta property="og:title" content="数组,方法">
+<meta property="og:url" content="http://example.com/2020/02/01/%E6%95%B0%E7%BB%84-%E6%96%B9%E6%B3%95/index.html">
+<meta property="og:site_name" content="Crush&#39;s Blog">
+<meta property="og:description" content="二十、数组我们可以使用数组来保存同一个数据类型的多个数据 1. 数组的特点​		①数组的长度一旦确定就不能改变 ​		②一个数组中元素的数据类型都是一样的 2. 数组的初始化2.1 动态初始化2.1.1 格式​			数据类型[] 数组名 &#x3D; new 数据类型[长度]; 例如： 1int[] arr &#x3D; new int[10];&#x2F;&#x2F;动态初始化了一个长度为10的数组，数组元素为int类型">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2020-02-01T10:36:47.000Z">
+<meta property="article:modified_time" content="2022-06-09T10:40:51.148Z">
+<meta property="article:author" content="Tony Stark">
+<meta property="article:tag" content="java">
+<meta name="twitter:card" content="summary">
+
+<link rel="canonical" href="http://example.com/2020/02/01/%E6%95%B0%E7%BB%84-%E6%96%B9%E6%B3%95/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title>数组,方法 | Crush's Blog</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">Crush's Blog</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">越努力，越幸运！</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签<span class="badge">7</span></a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类<span class="badge">8</span></a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档<span class="badge">25</span></a>
+
+  </li>
+  </ul>
+</nav>
+
+
+
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2020/02/01/%E6%95%B0%E7%BB%84-%E6%96%B9%E6%B3%95/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.jpg">
+      <meta itemprop="name" content="Tony Stark">
+      <meta itemprop="description" content="程序员小新儿">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Crush's Blog">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          数组,方法
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2020-02-01 18:36:47" itemprop="dateCreated datePublished" datetime="2020-02-01T18:36:47+08:00">2020-02-01</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2022-06-09 18:40:51" itemprop="dateModified" datetime="2022-06-09T18:40:51+08:00">2022-06-09</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Java%E5%9F%BA%E7%A1%80/" itemprop="url" rel="index"><span itemprop="name">Java基础</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h1 id="二十、数组"><a href="#二十、数组" class="headerlink" title="二十、数组"></a>二十、数组</h1><p>我们可以使用数组来保存同一个数据类型的多个数据</p>
+<h2 id="1-数组的特点"><a href="#1-数组的特点" class="headerlink" title="1. 数组的特点"></a>1. 数组的特点</h2><p>​		①数组的长度一旦确定就不能改变</p>
+<p>​		②一个数组中元素的数据类型都是一样的</p>
+<h2 id="2-数组的初始化"><a href="#2-数组的初始化" class="headerlink" title="2. 数组的初始化"></a>2. 数组的初始化</h2><h3 id="2-1-动态初始化"><a href="#2-1-动态初始化" class="headerlink" title="2.1 动态初始化"></a>2.1 动态初始化</h3><h4 id="2-1-1-格式"><a href="#2-1-1-格式" class="headerlink" title="2.1.1 格式"></a>2.1.1 格式</h4><p>​			数据类型[] 数组名 &#x3D; new 数据类型[长度];</p>
+<p>例如：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">int</span>[] arr = <span class="keyword">new</span> <span class="title class_">int</span>[<span class="number">10</span>];<span class="comment">//动态初始化了一个长度为10的数组，数组元素为int类型</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="2-2-静态初始化"><a href="#2-2-静态初始化" class="headerlink" title="2.2 静态初始化"></a>2.2 静态初始化</h3><h4 id="2-2-1-格式"><a href="#2-2-1-格式" class="headerlink" title="2.2.1 格式"></a>2.2.1 格式</h4><p>​		标准格式：</p>
+<p>​					数据类型[] 数组名 &#x3D; new 数据类型[] {元素值1,元素值2,元素值3,…};</p>
+<p>例如：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">int</span>[] arr = <span class="keyword">new</span> <span class="title class_">int</span>[]&#123;<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>,<span class="number">4</span>,<span class="number">5</span>&#125;;</span><br></pre></td></tr></table></figure>
+
+<p>​		省略格式（<font color='red'>推荐使用</font>）：</p>
+<p>​					数据类型[] 数组名 &#x3D; {元素值1,元素值2,元素值3,…};</p>
+<p>例如：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">int</span>[] arr = &#123;<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>,<span class="number">4</span>,<span class="number">5</span>&#125;;</span><br></pre></td></tr></table></figure>
+
+<h3 id="2-3-总结"><a href="#2-3-总结" class="headerlink" title="2.3 总结"></a>2.3 总结</h3><p>​		静态初始化和动态初始化都可以实现对数组的初始化，那么我们在需要创建数组的时候应该如何选择呢？</p>
+<p>​		如果数组元素都确定好了，并且个数有限的情况下我们可以使用静态初始化，因为更方便。如果只能确定数组的长度，数组的元素值需要后面再赋值的话可以使用动态初始化。</p>
+<h2 id="3-数组元素的表示"><a href="#3-数组元素的表示" class="headerlink" title="3. 数组元素的表示"></a>3. 数组元素的表示</h2><h3 id="3-1-格式"><a href="#3-1-格式" class="headerlink" title="3.1 格式"></a>3.1 格式</h3><p>​				数组名[索引值]</p>
+<p>例如：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">int</span>[] arr = &#123;<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>,<span class="number">4</span>&#125;;</span><br><span class="line"><span class="comment">//输出数组arr的第一个元素</span></span><br><span class="line">System.out.println(arr[<span class="number">0</span>]);</span><br><span class="line"><span class="comment">//把数组arr的第3个元素值修改为5</span></span><br><span class="line">arr[<span class="number">2</span>] = <span class="number">5</span>;</span><br></pre></td></tr></table></figure>
+
+<h3 id="3-2-注意"><a href="#3-2-注意" class="headerlink" title="3.2 注意"></a>3.2 注意</h3><p>​	索引值就是一个int数字，代表数组当中元素的编号。</p>
+<p>​	索引值从0开始，一直到“数组的长度-1”为止。例如长度为5的数组他的索引范围为0到4</p>
+<h2 id="4-数组的内存结构"><a href="#4-数组的内存结构" class="headerlink" title="4. 数组的内存结构"></a>4. 数组的内存结构</h2><p>观察下面代码的输出结果</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">int</span>[] arr = <span class="keyword">new</span> <span class="title class_">int</span>[<span class="number">5</span>];</span><br><span class="line">arr[<span class="number">0</span>] = <span class="number">1</span>;</span><br><span class="line">arr[<span class="number">1</span>] = <span class="number">2</span>;</span><br><span class="line"><span class="type">int</span>[] arr2 = arr;</span><br><span class="line">arr2[<span class="number">2</span>] = <span class="number">3</span>;</span><br><span class="line">arr2[<span class="number">3</span>] = <span class="number">4</span>;</span><br><span class="line">System.out.println(arr2[<span class="number">0</span>]);</span><br><span class="line">System.out.println(arr[<span class="number">3</span>]);</span><br></pre></td></tr></table></figure>
+
+<p>如果想要弄明白上面代码的输出结果就需要知道一个数组在内存中是如何存储的。</p>
+<p><strong>实际上，数组的实体保存在堆中，数组名实际保存的是数组实体的地址值。</strong></p>
+<h2 id="5-数组长度"><a href="#5-数组长度" class="headerlink" title="5. 数组长度"></a>5. 数组长度</h2><p>在java中我们可以非常方便的获取到数组的长度，格式如下：</p>
+<p>​	    <strong><font color='red'> 数组名.length</font></strong></p>
+<p>例如：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">int</span>[] arr = &#123;<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>,<span class="number">4</span>&#125;;</span><br><span class="line"><span class="comment">//输出数组长度</span></span><br><span class="line">System.out.println(arr.length);</span><br></pre></td></tr></table></figure>
+
+<h2 id="6-数组的遍历"><a href="#6-数组的遍历" class="headerlink" title="6. 数组的遍历"></a>6. 数组的遍历</h2><p>我们在操作数组的时候很多时候需要对数组的每个元素挨个操作一遍，这种情况下我们就可以对数组进行遍历操作。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">int</span>[] arr=&#123;<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>,<span class="number">4</span>,<span class="number">5</span>,<span class="number">7</span>&#125;;</span><br><span class="line"><span class="comment">//遍历输出数组元素</span></span><br><span class="line"><span class="keyword">for</span>(<span class="type">int</span> i=<span class="number">0</span>;i&lt;arr.length;i++)&#123;</span><br><span class="line">	System.out.println(arr[i]);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="7-常见问题"><a href="#7-常见问题" class="headerlink" title="7. 常见问题"></a>7. 常见问题</h2><p>1.观察下面程序的执行结果     ArrayIndexOutOfBoundsException 数组索引越界</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">int</span>[] arr = <span class="keyword">new</span> <span class="title class_">int</span>[<span class="number">3</span>];</span><br><span class="line">arr[<span class="number">1</span>] = <span class="number">1</span>;</span><br><span class="line">arr[<span class="number">2</span>] = <span class="number">2</span>;</span><br><span class="line">arr[<span class="number">3</span>] = <span class="number">3</span>;</span><br><span class="line">System.out.println(arr[<span class="number">2</span>]);</span><br></pre></td></tr></table></figure>
+
+<h1 id="二十一、数组-练习题"><a href="#二十一、数组-练习题" class="headerlink" title="二十一、数组-练习题"></a>二十一、数组-练习题</h1><p>1.定义一个长度为100的int数组,要求里面的元素分别为1,3,5,7,9…….最后还要把数组里面的每个元素都打印出来</p>
+<p>2.定义一个长度为10的int数组，要求用户使用键盘录入分别给数组的每个元素赋值。最后计算出该数组所有元素的总和，最大值，最小值并打印到控制台中。</p>
+<p>3.定义2个长度为5的字符串数组arrA和arrB，arrA包含元素{“1”,”2”,”3”,”4”,”5”}，arrA中的所有元素按逆序存储在数组arrB中，</p>
+<p>在控制台打印输出arrB数组中所有元素</p>
+<p>4.分析以下需求，并用代码实现：</p>
+<p>   (1).定义一个int类型的数组，内容为{171,72,19,16,118,51,210,7,18}</p>
+<p>   (2).求出该数组中特定元素的和，特定元素是指个位和十位不包含7的偶数。</p>
+<p>5.分析以下需求，并用代码实现</p>
+<p>定义一个数组，数组的元素为：{3，4，11，55，32，10，8，5}，要求使用代码对该数组进行从大到小的排序，排序后的结果为{55，32，11，10，8，5，4，3}</p>
+<p>6.分析以下需求，并用代码实现</p>
+<p>有一对兔子，从出生后第三个月起每个月都生一对兔子，小兔子长到第三个月后每个月又生一对兔子，假如兔子都不死，问第二十个月的兔子对数为多少？</p>
+<h1 id="二十二、方法"><a href="#二十二、方法" class="headerlink" title="二十二、方法"></a>二十二、方法</h1><p>我们在编程过程中有的时候会遇到一些固定套路的代码，我们可以把这些代码封装成方法，这样我们后面去使用的时候就会更加的方便。并且代码也会更简洁，代码复用性更高。</p>
+<h2 id="1-方法的定义格式"><a href="#1-方法的定义格式" class="headerlink" title="1. 方法的定义格式"></a>1. 方法的定义格式</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">修饰符 返回值类型 方法名(参数类型<span class="number">1</span> 参数名<span class="number">1</span>,参数类型<span class="number">2</span> 参数名<span class="number">2</span>,....)&#123;</span><br><span class="line">      方法体;</span><br><span class="line">      <span class="keyword">return</span> 返回值;</span><br><span class="line">  &#125;</span><br></pre></td></tr></table></figure>
+
+<p>​		修饰符： 目前阶段使用public static 后期学完权限修饰符和static等修饰符后可以灵活使用</p>
+<p>​		参数：  执行方法需要的数据</p>
+<p>​		返回值: 方法执行完后得到的结果</p>
+<p>​		方法体：方法中的代码</p>
+<p>​		返回值类型：返回值执行完后结果的数据类型，如果没有结果就写成void</p>
+<p>例如：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">printInt</span><span class="params">(<span class="type">int</span> num)</span>&#123;</span><br><span class="line">    System.out.println(num);</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">public</span> <span class="keyword">static</span> <span class="type">int</span> <span class="title function_">getSum</span><span class="params">(<span class="type">int</span> a,<span class="type">int</span> b)</span>&#123;</span><br><span class="line">    <span class="keyword">return</span> a+b;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="2-方法的调用格式"><a href="#2-方法的调用格式" class="headerlink" title="2. 方法的调用格式"></a>2. 方法的调用格式</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">方法名(参数<span class="number">1</span>,参数<span class="number">2.</span>..);</span><br></pre></td></tr></table></figure>
+
+<h3 id="2-1-注意"><a href="#2-1-注意" class="headerlink" title="2.1 注意"></a>2.1 注意</h3><p>​			传参数的时候方法定义里有几个参数就传几个参数.方法定义的时候参数是什么类型就传什么类型.<br>​			如果方法有返回值，一般是用变量来接收返回值，返回值是什么类型，就用什么类型的变量来接收。</p>
+<p>例如：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">Demo</span>&#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">printInt</span><span class="params">(<span class="type">int</span> num)</span>&#123;</span><br><span class="line">       System.out.println(num);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="type">int</span> <span class="title function_">getSum</span><span class="params">(<span class="type">int</span> a,<span class="type">int</span> b)</span>&#123;</span><br><span class="line">       <span class="keyword">return</span> a+b;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span>&#123;</span><br><span class="line">       printInt(<span class="number">10</span>);</span><br><span class="line">       printInt(<span class="number">20</span>);</span><br><span class="line">       <span class="type">int</span> <span class="variable">sum</span> <span class="operator">=</span> getSum(<span class="number">1</span>,<span class="number">2</span>);</span><br><span class="line">    &#125; </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="3-return的作用"><a href="#3-return的作用" class="headerlink" title="3. return的作用"></a>3. return的作用</h2><p>​			1.返回方法的返回值   </p>
+<p>​			2. 结束方法(reutrn执行后整个方法执行结束)</p>
+<h2 id="4-方法重载"><a href="#4-方法重载" class="headerlink" title="4. 方法重载"></a>4. 方法重载</h2><p>定义：在同一个类中,方法名相同,参数列表不同的方法才叫方法重载（与返回值无关）</p>
+<p>参数列表不同：1. 参数类型不同  2.参数个数不同  3.参数顺序不同</p>
+<p>如何判断参数列表是否相同？把参数类型全部拼接成一个字符串，如果字符串的内容不同就算参数列表不同。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">Demo</span>&#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="type">int</span> <span class="title function_">test</span><span class="params">(<span class="type">int</span> a,<span class="type">int</span> b)</span>&#123;&#125;   <span class="comment">// intint</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">test</span><span class="params">(<span class="type">int</span> a,<span class="type">int</span> b)</span>&#123;&#125;<span class="comment">//错  </span></span><br><span class="line">    </span><br><span class="line">    </span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">test</span><span class="params">(<span class="type">int</span> a,<span class="type">int</span> b,<span class="type">int</span> c)</span>&#123;&#125;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">test</span><span class="params">(<span class="type">int</span> x,<span class="type">int</span> y)</span>&#123;&#125;<span class="comment">//错   </span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">test</span><span class="params">(<span class="type">int</span> a,<span class="type">double</span> b)</span>&#123;&#125;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">test</span><span class="params">(<span class="type">double</span> a,<span class="type">int</span> b)</span>&#123;&#125;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">test</span><span class="params">(<span class="type">double</span> a,<span class="type">double</span> b)</span>&#123;&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="5-小思考"><a href="#5-小思考" class="headerlink" title="5. 小思考"></a>5. 小思考</h2><p>1.一个方法能不能有两个返回值?(PS:学会用代码去验证你的想法)</p>
+<p>答案：<span style='background:white'>不能直接返回，可以把结果放入数组中返回</span></p>
+<p>2.没有返回值的方法中能不能写return?</p>
+<p>答案：<span style='background:white'> 可以，可以用来结束方法。但是return的后面不能跟数据; </span></p>
+<p>3.看看下面代码的输出结果是什么?    </p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span> &#123;</span><br><span class="line">	<span class="type">int</span> <span class="variable">a</span> <span class="operator">=</span> <span class="number">10</span>;</span><br><span class="line">	<span class="type">int</span> <span class="variable">b</span> <span class="operator">=</span> <span class="number">20</span>;</span><br><span class="line">	System.out.println(<span class="string">&quot;a=&quot;</span>+a);</span><br><span class="line">	System.out.println(<span class="string">&quot;b=&quot;</span>+b);</span><br><span class="line">	change(a,b);</span><br><span class="line">	System.out.println(<span class="string">&quot;方法调用后a=&quot;</span>+a);</span><br><span class="line">	System.out.println(<span class="string">&quot;方法调用后b=&quot;</span>+b);</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">change</span><span class="params">(<span class="type">int</span> a,<span class="type">int</span> b)</span>&#123;</span><br><span class="line">	<span class="type">int</span> <span class="variable">temp</span> <span class="operator">=</span> a;<span class="comment">//int temp = 10;</span></span><br><span class="line">	a = b;<span class="comment">//a = 20;</span></span><br><span class="line">	b = temp;<span class="comment">// b = 10;</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>4.看看下面代码的输出结果是什么?</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span> &#123;</span><br><span class="line">	<span class="type">int</span>[] arr = &#123;<span class="number">1</span>,<span class="number">2</span>&#125;</span><br><span class="line">	System.out.println(<span class="string">&quot;arr[0]=&quot;</span>+arr[<span class="number">0</span>]);</span><br><span class="line">	System.out.println(<span class="string">&quot;arr[1]=&quot;</span>+arr[<span class="number">1</span>]);</span><br><span class="line">	change(arr);</span><br><span class="line">	System.out.println(<span class="string">&quot;方法调用后arr[0]=&quot;</span>+arr[<span class="number">0</span>]);</span><br><span class="line">	System.out.println(<span class="string">&quot;方法调用后arr[1]=&quot;</span>+arr[<span class="number">1</span>]);</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">change</span><span class="params">(<span class="type">int</span>[] arr)</span>&#123;</span><br><span class="line">	<span class="type">int</span> <span class="variable">temp</span> <span class="operator">=</span> arr[<span class="number">0</span>];</span><br><span class="line">	arr[<span class="number">0</span>] = arr[<span class="number">1</span>];</span><br><span class="line">	arr[<span class="number">1</span>] = temp;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>问题：java中方法调用的时候，形参的改变会不会影响实参？</p>
+<p>答：如果方法的参数是基本数据类型，形参的改变不会影响实参。如果方法的参数是引用数据类型，形参的改变会影响实参。</p>
+<h2 id="6-作业"><a href="#6-作业" class="headerlink" title="6. 作业"></a>6. 作业</h2><p>看看下面代码的输出结果是什么?</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span> &#123;</span><br><span class="line">    <span class="type">int</span>[] arr = &#123;<span class="number">1</span>,<span class="number">2</span>&#125;;</span><br><span class="line">    System.out.println(<span class="string">&quot;arr[0]=&quot;</span>+arr[<span class="number">0</span>]);</span><br><span class="line">    System.out.println(<span class="string">&quot;arr[1]=&quot;</span>+arr[<span class="number">1</span>]);</span><br><span class="line">    change(arr);</span><br><span class="line">    System.out.println(<span class="string">&quot;方法调用后arr[0]=&quot;</span>+arr[<span class="number">0</span>]);</span><br><span class="line">    System.out.println(<span class="string">&quot;方法调用后arr[1]=&quot;</span>+arr[<span class="number">1</span>]);</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">change</span><span class="params">(<span class="type">int</span>[] arr)</span>&#123;</span><br><span class="line">    arr = <span class="keyword">new</span> <span class="title class_">int</span>[<span class="number">2</span>];</span><br><span class="line">    arr[<span class="number">0</span>] = <span class="number">2</span>;</span><br><span class="line">    arr[<span class="number">1</span>] = <span class="number">1</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h1 id="二十三、方法-练习题"><a href="#二十三、方法-练习题" class="headerlink" title="二十三、方法-练习题"></a>二十三、方法-练习题</h1><p>1.定义一个方法，该方法能够求两个整数中的最大值。定义完后尝试调用它。</p>
+<p>1.1.定义一个方法，该方法能够打印两个整数的最大值。定义完后尝试调用它</p>
+<p>2.定义一个方法，该方法能够求三个整数中的最大值。定义完后尝试调用它。</p>
+<p>3.定义一个方法，该方法可以把一个数组打印出来，打印格式如下：{1,2,3,4,5}</p>
+<p>4.定义一个方法，该方法可以求一个数组中的最大值</p>
+<p>5.定义一个方法，该方法可以把一个数组进行排序（从小到大）</p>
+<p>6.定义一个方法，该方法可以获取一个任意长度的随机字符串，字符串中的字符可能是 英文大小写和数字</p>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/java/" rel="tag"># java</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2020/02/01/%E5%BE%AA%E7%8E%AF%E8%AF%AD%E5%8F%A5-%E5%BE%AA%E7%8E%AF%E6%8E%A7%E5%88%B6%E8%AF%AD%E5%8F%A5-Random/" rel="prev" title="循环语句,循环控制语句,Random">
+      <i class="fa fa-chevron-left"></i> 循环语句,循环控制语句,Random
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2020/02/01/%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%EF%BC%88%E5%9F%BA%E7%A1%80-%E5%B0%81%E8%A3%85%EF%BC%89/" rel="next" title="面向对象（基础,封装）">
+      面向对象（基础,封装） <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E4%BA%8C%E5%8D%81%E3%80%81%E6%95%B0%E7%BB%84"><span class="nav-number">1.</span> <span class="nav-text">二十、数组</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-%E6%95%B0%E7%BB%84%E7%9A%84%E7%89%B9%E7%82%B9"><span class="nav-number">1.1.</span> <span class="nav-text">1. 数组的特点</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-%E6%95%B0%E7%BB%84%E7%9A%84%E5%88%9D%E5%A7%8B%E5%8C%96"><span class="nav-number">1.2.</span> <span class="nav-text">2. 数组的初始化</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#2-1-%E5%8A%A8%E6%80%81%E5%88%9D%E5%A7%8B%E5%8C%96"><span class="nav-number">1.2.1.</span> <span class="nav-text">2.1 动态初始化</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#2-1-1-%E6%A0%BC%E5%BC%8F"><span class="nav-number">1.2.1.1.</span> <span class="nav-text">2.1.1 格式</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-2-%E9%9D%99%E6%80%81%E5%88%9D%E5%A7%8B%E5%8C%96"><span class="nav-number">1.2.2.</span> <span class="nav-text">2.2 静态初始化</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#2-2-1-%E6%A0%BC%E5%BC%8F"><span class="nav-number">1.2.2.1.</span> <span class="nav-text">2.2.1 格式</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-3-%E6%80%BB%E7%BB%93"><span class="nav-number">1.2.3.</span> <span class="nav-text">2.3 总结</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-%E6%95%B0%E7%BB%84%E5%85%83%E7%B4%A0%E7%9A%84%E8%A1%A8%E7%A4%BA"><span class="nav-number">1.3.</span> <span class="nav-text">3. 数组元素的表示</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#3-1-%E6%A0%BC%E5%BC%8F"><span class="nav-number">1.3.1.</span> <span class="nav-text">3.1 格式</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-2-%E6%B3%A8%E6%84%8F"><span class="nav-number">1.3.2.</span> <span class="nav-text">3.2 注意</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4-%E6%95%B0%E7%BB%84%E7%9A%84%E5%86%85%E5%AD%98%E7%BB%93%E6%9E%84"><span class="nav-number">1.4.</span> <span class="nav-text">4. 数组的内存结构</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#5-%E6%95%B0%E7%BB%84%E9%95%BF%E5%BA%A6"><span class="nav-number">1.5.</span> <span class="nav-text">5. 数组长度</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#6-%E6%95%B0%E7%BB%84%E7%9A%84%E9%81%8D%E5%8E%86"><span class="nav-number">1.6.</span> <span class="nav-text">6. 数组的遍历</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#7-%E5%B8%B8%E8%A7%81%E9%97%AE%E9%A2%98"><span class="nav-number">1.7.</span> <span class="nav-text">7. 常见问题</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E4%BA%8C%E5%8D%81%E4%B8%80%E3%80%81%E6%95%B0%E7%BB%84-%E7%BB%83%E4%B9%A0%E9%A2%98"><span class="nav-number">2.</span> <span class="nav-text">二十一、数组-练习题</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E4%BA%8C%E5%8D%81%E4%BA%8C%E3%80%81%E6%96%B9%E6%B3%95"><span class="nav-number">3.</span> <span class="nav-text">二十二、方法</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-%E6%96%B9%E6%B3%95%E7%9A%84%E5%AE%9A%E4%B9%89%E6%A0%BC%E5%BC%8F"><span class="nav-number">3.1.</span> <span class="nav-text">1. 方法的定义格式</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-%E6%96%B9%E6%B3%95%E7%9A%84%E8%B0%83%E7%94%A8%E6%A0%BC%E5%BC%8F"><span class="nav-number">3.2.</span> <span class="nav-text">2. 方法的调用格式</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#2-1-%E6%B3%A8%E6%84%8F"><span class="nav-number">3.2.1.</span> <span class="nav-text">2.1 注意</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-return%E7%9A%84%E4%BD%9C%E7%94%A8"><span class="nav-number">3.3.</span> <span class="nav-text">3. return的作用</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4-%E6%96%B9%E6%B3%95%E9%87%8D%E8%BD%BD"><span class="nav-number">3.4.</span> <span class="nav-text">4. 方法重载</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#5-%E5%B0%8F%E6%80%9D%E8%80%83"><span class="nav-number">3.5.</span> <span class="nav-text">5. 小思考</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#6-%E4%BD%9C%E4%B8%9A"><span class="nav-number">3.6.</span> <span class="nav-text">6. 作业</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E4%BA%8C%E5%8D%81%E4%B8%89%E3%80%81%E6%96%B9%E6%B3%95-%E7%BB%83%E4%B9%A0%E9%A2%98"><span class="nav-number">4.</span> <span class="nav-text">二十三、方法-练习题</span></a></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Tony Stark"
+      src="/images/avatar.jpg">
+  <p class="site-author-name" itemprop="name">Tony Stark</p>
+  <div class="site-description" itemprop="description">程序员小新儿</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">25</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">8</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">7</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/Crush0321" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;Crush0321" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://weibo.com/Crush_0321" title="Weibo → https:&#x2F;&#x2F;weibo.com&#x2F;Crush_0321" rel="noopener" target="_blank"><i class="fab fa-weibo fa-fw"></i>Weibo</a>
+      </span>
+  </div>
+
+
+  <div class="links-of-blogroll motion-element">
+    <div class="links-of-blogroll-title"><i class="fa fa-link fa-fw"></i>
+      Links
+    </div>
+    <ul class="links-of-blogroll-list">
+        <li class="links-of-blogroll-item">
+          <a href="https://blog.k8s.li/" title="https:&#x2F;&#x2F;blog.k8s.li&#x2F;" rel="noopener" target="_blank">Reimu's blog</a>
+        </li>
+    </ul>
+  </div>
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2022</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Tony Stark</span>
+</div>
+
+<!--隐藏网页底部 powered By Hexo / 强力驱动
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> 强力驱动
+  </div> -->
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+
+</body>
+</html>

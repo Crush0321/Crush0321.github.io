@@ -1,0 +1,545 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 6.2.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon32.ico">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon16.ico">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"example.com","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":true},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
+  </script>
+
+  <meta name="description" content="十六、循环语句当我们需要多次执行完全重复的操作或者是多次执行有规律的操作时，我们就可以用循环语句。 在java中有三种循环语句，分别是for循环，while循环，do…while循环。 1. for循环1.1 格式123for(初始化语句;布尔表达式(条件判断);步进语句)&amp;#123;	循环体;&amp;#125;  例如： 12345public static void main(String[] ar">
+<meta property="og:type" content="article">
+<meta property="og:title" content="循环语句,循环控制语句,Random">
+<meta property="og:url" content="http://example.com/2020/02/01/%E5%BE%AA%E7%8E%AF%E8%AF%AD%E5%8F%A5-%E5%BE%AA%E7%8E%AF%E6%8E%A7%E5%88%B6%E8%AF%AD%E5%8F%A5-Random/index.html">
+<meta property="og:site_name" content="Crush&#39;s Blog">
+<meta property="og:description" content="十六、循环语句当我们需要多次执行完全重复的操作或者是多次执行有规律的操作时，我们就可以用循环语句。 在java中有三种循环语句，分别是for循环，while循环，do…while循环。 1. for循环1.1 格式123for(初始化语句;布尔表达式(条件判断);步进语句)&amp;#123;	循环体;&amp;#125;  例如： 12345public static void main(String[] ar">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2020-02-01T10:33:01.000Z">
+<meta property="article:modified_time" content="2022-06-09T10:33:52.987Z">
+<meta property="article:author" content="Tony Stark">
+<meta property="article:tag" content="java">
+<meta name="twitter:card" content="summary">
+
+<link rel="canonical" href="http://example.com/2020/02/01/%E5%BE%AA%E7%8E%AF%E8%AF%AD%E5%8F%A5-%E5%BE%AA%E7%8E%AF%E6%8E%A7%E5%88%B6%E8%AF%AD%E5%8F%A5-Random/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title>循环语句,循环控制语句,Random | Crush's Blog</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">Crush's Blog</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">越努力，越幸运！</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签<span class="badge">7</span></a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类<span class="badge">8</span></a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档<span class="badge">25</span></a>
+
+  </li>
+  </ul>
+</nav>
+
+
+
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2020/02/01/%E5%BE%AA%E7%8E%AF%E8%AF%AD%E5%8F%A5-%E5%BE%AA%E7%8E%AF%E6%8E%A7%E5%88%B6%E8%AF%AD%E5%8F%A5-Random/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.jpg">
+      <meta itemprop="name" content="Tony Stark">
+      <meta itemprop="description" content="程序员小新儿">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Crush's Blog">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          循环语句,循环控制语句,Random
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2020-02-01 18:33:01" itemprop="dateCreated datePublished" datetime="2020-02-01T18:33:01+08:00">2020-02-01</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2022-06-09 18:33:52" itemprop="dateModified" datetime="2022-06-09T18:33:52+08:00">2022-06-09</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Java%E5%9F%BA%E7%A1%80/" itemprop="url" rel="index"><span itemprop="name">Java基础</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h1 id="十六、循环语句"><a href="#十六、循环语句" class="headerlink" title="十六、循环语句"></a>十六、循环语句</h1><p>当我们需要多次执行完全重复的操作或者是多次执行有规律的操作时，我们就可以用循环语句。</p>
+<p>在java中有三种循环语句，分别是for循环，while循环，do…while循环。</p>
+<h2 id="1-for循环"><a href="#1-for循环" class="headerlink" title="1. for循环"></a>1. for循环</h2><h3 id="1-1-格式"><a href="#1-1-格式" class="headerlink" title="1.1 格式"></a>1.1 格式</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span>(初始化语句;布尔表达式(条件判断);步进语句)&#123;</span><br><span class="line">	循环体;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>例如：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span> &#123;</span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> <span class="variable">i</span> <span class="operator">=</span> <span class="number">1</span>; i &lt;= <span class="number">5</span>; i++) &#123;</span><br><span class="line">        System.out.println(i);<span class="comment">//1  2  3   4   5</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="1-2-执行流程"><a href="#1-2-执行流程" class="headerlink" title="1.2 执行流程"></a>1.2 执行流程</h3><p>​	①先执行初始化语句,</p>
+<p>​	②然后看布尔表达式的结果,</p>
+<p>​				如果为false  循环结束,</p>
+<p>​				如果为true  执行循环体.</p>
+<p>​	③循环体执行完后执行步进语句.然后继续执行②判断布尔表达式的结果(PS:注意,不是初始化语句)</p>
+<p>​	然后以此类推.</p>
+<h3 id="1-3-注意"><a href="#1-3-注意" class="headerlink" title="1.3 注意"></a>1.3 注意</h3><p>①初始化语句、布尔表达式、步进语句之间是用分号分隔，而不是逗号。 但是在初始化语句和步进语句部分，我们可使 用一系列由逗号分隔的语句。而且那些语句均会独立执行 。例如：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span>(<span class="type">int</span> <span class="variable">i</span> <span class="operator">=</span> <span class="number">1</span>,j = <span class="number">10</span>;i&lt;j;i++,j--)&#123;</span><br><span class="line">	循环体;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>②无论初始化语句，布尔表达式，还是步进语句，都可以空着不写，但是分号不能少 。例如：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span>(;;)&#123;</span><br><span class="line">	循环体;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>③如果在初始化语句中定义了变量，那么该变量只能在循环中使用，循环结束了就出来变量的作用范围</p>
+<h3 id="1-4-小思考"><a href="#1-4-小思考" class="headerlink" title="1.4 小思考"></a>1.4 小思考</h3><p>​	①初始化语句会执行几次?</p>
+<p>​	答案：<span style='background:white'> 只有在最开始的时候执行了一次 </span><br>​	②什么情况下循环体一次都执行不了?</p>
+<p>​	答案：<span style='background:white'> 如果第一次进行条件判断的时候结果为false则循环体一次都执行不了 </span></p>
+<h3 id="1-5-练习"><a href="#1-5-练习" class="headerlink" title="1.5 练习"></a>1.5 练习</h3><p>1.输出1~100所有的数</p>
+<p>2.输出100~1的所有的数</p>
+<p>3.要求求出1~100的和</p>
+<p>4.求1~100的偶数和</p>
+<p>5.求1~100中既能被3整除又能被5整除的数有多少个</p>
+<h2 id="2-While循环"><a href="#2-While循环" class="headerlink" title="2. While循环"></a>2. While循环</h2><h3 id="2-1-格式"><a href="#2-1-格式" class="headerlink" title="2.1 格式"></a>2.1 格式</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">while</span>(布尔表达式)&#123;</span><br><span class="line">	循环体;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>例如：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span> &#123;</span><br><span class="line">    <span class="type">int</span> <span class="variable">i</span> <span class="operator">=</span> <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">while</span> (i&lt;=<span class="number">10</span>)&#123;</span><br><span class="line">        System.out.println(i);<span class="comment">//0  1  2   ... 10   </span></span><br><span class="line">        i++;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="2-2-执行流程"><a href="#2-2-执行流程" class="headerlink" title="2.2 执行流程"></a>2.2 执行流程</h3><p>​		①看布尔表达式的结果</p>
+<p>​						如果为false循环结束</p>
+<p>​						如果为true,则执行循环体.</p>
+<p>​		②循环体执行完后继续执行①以此类推</p>
+<h2 id="3-do…while循环"><a href="#3-do…while循环" class="headerlink" title="3. do…while循环"></a>3. do…while循环</h2><h3 id="3-1-格式"><a href="#3-1-格式" class="headerlink" title="3.1 格式"></a>3.1 格式</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">do</span>&#123;</span><br><span class="line">	循环体;</span><br><span class="line">&#125;<span class="keyword">while</span>(布尔表达式);</span><br></pre></td></tr></table></figure>
+
+<p>例如：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span> &#123;</span><br><span class="line">    <span class="type">int</span> <span class="variable">i</span> <span class="operator">=</span> <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">do</span>&#123;</span><br><span class="line">        System.out.println(i);<span class="comment">//0  1  2  3 4 ...  10</span></span><br><span class="line">        i++;</span><br><span class="line">    &#125;<span class="keyword">while</span> (i&lt;=<span class="number">10</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>注意：while小括号后面必须有个分号。</p>
+<h3 id="3-2-执行流程"><a href="#3-2-执行流程" class="headerlink" title="3.2 执行流程"></a>3.2 执行流程</h3><p>​		①执行循环体</p>
+<p>​		②然后看布尔表达式的结果</p>
+<p>​							如果为true则继续执行①循环体</p>
+<p>​							如果判断表达式的结果为false则循环结束</p>
+<p>​		 	以此类推</p>
+<h2 id="4-循环总结"><a href="#4-循环总结" class="headerlink" title="4. 循环总结"></a>4. 循环总结</h2><p><span style='background:white'>  如何选择循环语句：  </span><br><span style='background:white'> 循环之间其实是都可以相互转换的，所以用哪种循环都可以。但是用的最多的是for循环,如果循环次数已知一般用for. 	while循环一般在循环次数未知的情况下使用,或者死循环一般都用while循环 	do…while循环基本不用 </span></p>
+<h1 id="十七、循环控制语句"><a href="#十七、循环控制语句" class="headerlink" title="十七、循环控制语句"></a>十七、循环控制语句</h1><p>我们在循环的过程中有的时候可能需要跳过某次或某几次循环、甚至直接结束整个循环。这个时候我们就可以使用循环控制语句。</p>
+<p>循环控制语句主要有两个：<font color='red'>break</font>,<font color='red'>continue</font></p>
+<h2 id="1-break"><a href="#1-break" class="headerlink" title="1. break"></a>1. break</h2><p>在循环过程中,碰到break<font color='red'> 整个循环 </font>就直接<font color='red'>结束</font>了</p>
+<p>例如：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span> &#123;</span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> <span class="variable">i</span> <span class="operator">=</span> <span class="number">0</span>; i &lt; <span class="number">10</span>; i++) &#123;</span><br><span class="line">        System.out.println(i);<span class="comment">//0 1 2 3 4 5</span></span><br><span class="line">        <span class="keyword">if</span>(i==<span class="number">5</span>)&#123;</span><br><span class="line">            <span class="keyword">break</span>;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><strong><font color='red'> 注意：break只能出现在循环中或者switch中 </font></strong></p>
+<h2 id="2-continue"><a href="#2-continue" class="headerlink" title="2. continue"></a>2. continue</h2><p>如果在循环过程中碰到了continue,则<font color='red'> 跳过本次循环 </font>,<font color='red'> 继续下次循环 </font></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span> &#123;</span><br><span class="line">     <span class="keyword">for</span> (<span class="type">int</span> <span class="variable">i</span> <span class="operator">=</span> <span class="number">0</span>; i &lt; <span class="number">10</span>; i++) &#123;</span><br><span class="line">         System.out.println(i);<span class="comment">//0 1 2 3 4 5 6 7 ... 9</span></span><br><span class="line">         <span class="keyword">if</span>(i==<span class="number">5</span>)&#123;</span><br><span class="line">             <span class="keyword">continue</span>;</span><br><span class="line">         &#125;</span><br><span class="line">     &#125;</span><br><span class="line"> &#125;</span><br></pre></td></tr></table></figure>
+
+<p><strong><font color='red'> 注意：continue只能出现在循环中 </font></strong></p>
+<h2 id="3-小练习"><a href="#3-小练习" class="headerlink" title="3. 小练习"></a>3. 小练习</h2><p>下面代码的输出结果</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span> &#123;</span><br><span class="line">	<span class="keyword">for</span>(<span class="type">int</span> x=<span class="number">1</span>; x&lt;=<span class="number">10</span>; x++) &#123;</span><br><span class="line">		<span class="keyword">if</span>(x%<span class="number">2</span>==<span class="number">1</span>) &#123;</span><br><span class="line">			<span class="comment">//这里如果写的是break，continue的话分别会输出几次三更草堂</span></span><br><span class="line">                  </span><br><span class="line">		&#125;</span><br><span class="line">		System.out.println(<span class="string">&quot;三更草堂&quot;</span>);</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="4-常见小问题"><a href="#4-常见小问题" class="headerlink" title="4. 常见小问题"></a>4. 常见小问题</h2><p>下面代码的执行结果</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">int</span> <span class="variable">a</span> <span class="operator">=</span> <span class="number">10</span>;</span><br><span class="line"><span class="keyword">if</span>(a%<span class="number">2</span>==<span class="number">0</span>)&#123;</span><br><span class="line">    <span class="keyword">if</span>(a==<span class="number">0</span>)&#123;</span><br><span class="line">        <span class="keyword">break</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    System.out.println(<span class="string">&quot;a是偶数&quot;</span>);</span><br><span class="line">&#125;<span class="keyword">else</span>&#123;</span><br><span class="line">    System.out.println(<span class="string">&quot;a是偶数&quot;</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>答案：<span style='background:white'>直接报错，break只能出现在循环或switch语句中</span></p>
+<p>下面代码会输出哪些数字<br>代码:</p>
+<pre><code>    for(int i=1;i&lt;10;i++)&#123;
+        if(i%2==0)&#123;
+            continue;
+        &#125;else&#123;
+            break;
+        &#125;
+        System.out.println(i);
+    &#125;
+</code></pre>
+<p>答案：<span style='background:white'>因为最后的输出语句永远执行不到,这个时候编译的时候就会报错</span></p>
+<h1 id="十八、循环相关语句-练习题"><a href="#十八、循环相关语句-练习题" class="headerlink" title="十八、循环相关语句-练习题"></a>十八、循环相关语句-练习题</h1><p>1.获取10~99（包含10和99）的“总和”与“偶数”的个数，并在控制台打印输出</p>
+<p>2.我国最高山峰是珠穆朗玛峰：8848m，我现在有一张足够大的纸张，厚度为：0.01m。请问，我折叠多少次，就可以保证厚度不低于珠穆朗玛峰的高度?</p>
+<p>3.在数学中10!代表10的阶乘。既代表1x2x3x4….x10;现在要求编程求出8!。</p>
+<p>4.请输出下列的形状  </p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">  *</span><br><span class="line"> ***</span><br><span class="line">*****</span><br></pre></td></tr></table></figure>
+
+<p>5.打印99乘法表</p>
+<p>效果如下：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">1*1=1</span><br><span class="line">1*2=2	2*2=4</span><br><span class="line">1*3=3	2*3=6	3*3=9</span><br><span class="line">1*4=4   2*4=8   3*4=12  4*4=16</span><br><span class="line">.....</span><br></pre></td></tr></table></figure>
+
+<h1 id="十九、Random-生成随机数"><a href="#十九、Random-生成随机数" class="headerlink" title="十九、Random-生成随机数"></a>十九、Random-生成随机数</h1><p>我们可以通过 Random 类来生成随机数。</p>
+<h2 id="1-使用步骤"><a href="#1-使用步骤" class="headerlink" title="1. 使用步骤"></a>1. 使用步骤</h2><p>由于目前相关语法还没学习，所以先把步骤记住。后面学习了相关语法再来讲解。</p>
+<p>1、导包。在定义类的上面写上下面的语句。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> java.util.Random；</span><br></pre></td></tr></table></figure>
+
+<p>2、创建对象</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">Random</span> <span class="variable">r</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">Random</span>();</span><br></pre></td></tr></table></figure>
+
+<p>3、生成随机数</p>
+ <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">int</span> <span class="variable">num</span> <span class="operator">=</span> r.nextInt(<span class="number">10</span>);<span class="comment">//[0,9]</span></span><br></pre></td></tr></table></figure>
+
+<p>演示：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//导包</span></span><br><span class="line"><span class="keyword">import</span> java.util.Random;</span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">RandomDemo</span> &#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span> &#123;</span><br><span class="line">        <span class="type">Random</span> <span class="variable">r</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">Random</span>();</span><br><span class="line">        <span class="type">int</span> <span class="variable">num</span> <span class="operator">=</span> r.nextInt(<span class="number">10</span>)+ <span class="number">1</span>;<span class="comment">//[1,10]</span></span><br><span class="line">        System.out.println(num);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/java/" rel="tag"># java</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2020/02/01/%E6%B5%81%E7%A8%8B%E6%8E%A7%E5%88%B6%E8%AF%AD%E5%8F%A5%EF%BC%88if-switch%EF%BC%89/" rel="prev" title="流程控制语句（if,switch）">
+      <i class="fa fa-chevron-left"></i> 流程控制语句（if,switch）
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2020/02/01/%E6%95%B0%E7%BB%84-%E6%96%B9%E6%B3%95/" rel="next" title="数组,方法">
+      数组,方法 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%8D%81%E5%85%AD%E3%80%81%E5%BE%AA%E7%8E%AF%E8%AF%AD%E5%8F%A5"><span class="nav-number">1.</span> <span class="nav-text">十六、循环语句</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-for%E5%BE%AA%E7%8E%AF"><span class="nav-number">1.1.</span> <span class="nav-text">1. for循环</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-1-%E6%A0%BC%E5%BC%8F"><span class="nav-number">1.1.1.</span> <span class="nav-text">1.1 格式</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-2-%E6%89%A7%E8%A1%8C%E6%B5%81%E7%A8%8B"><span class="nav-number">1.1.2.</span> <span class="nav-text">1.2 执行流程</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-3-%E6%B3%A8%E6%84%8F"><span class="nav-number">1.1.3.</span> <span class="nav-text">1.3 注意</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-4-%E5%B0%8F%E6%80%9D%E8%80%83"><span class="nav-number">1.1.4.</span> <span class="nav-text">1.4 小思考</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-5-%E7%BB%83%E4%B9%A0"><span class="nav-number">1.1.5.</span> <span class="nav-text">1.5 练习</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-While%E5%BE%AA%E7%8E%AF"><span class="nav-number">1.2.</span> <span class="nav-text">2. While循环</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#2-1-%E6%A0%BC%E5%BC%8F"><span class="nav-number">1.2.1.</span> <span class="nav-text">2.1 格式</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-2-%E6%89%A7%E8%A1%8C%E6%B5%81%E7%A8%8B"><span class="nav-number">1.2.2.</span> <span class="nav-text">2.2 执行流程</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-do%E2%80%A6while%E5%BE%AA%E7%8E%AF"><span class="nav-number">1.3.</span> <span class="nav-text">3. do…while循环</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#3-1-%E6%A0%BC%E5%BC%8F"><span class="nav-number">1.3.1.</span> <span class="nav-text">3.1 格式</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-2-%E6%89%A7%E8%A1%8C%E6%B5%81%E7%A8%8B"><span class="nav-number">1.3.2.</span> <span class="nav-text">3.2 执行流程</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4-%E5%BE%AA%E7%8E%AF%E6%80%BB%E7%BB%93"><span class="nav-number">1.4.</span> <span class="nav-text">4. 循环总结</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%8D%81%E4%B8%83%E3%80%81%E5%BE%AA%E7%8E%AF%E6%8E%A7%E5%88%B6%E8%AF%AD%E5%8F%A5"><span class="nav-number">2.</span> <span class="nav-text">十七、循环控制语句</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-break"><span class="nav-number">2.1.</span> <span class="nav-text">1. break</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-continue"><span class="nav-number">2.2.</span> <span class="nav-text">2. continue</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-%E5%B0%8F%E7%BB%83%E4%B9%A0"><span class="nav-number">2.3.</span> <span class="nav-text">3. 小练习</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4-%E5%B8%B8%E8%A7%81%E5%B0%8F%E9%97%AE%E9%A2%98"><span class="nav-number">2.4.</span> <span class="nav-text">4. 常见小问题</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%8D%81%E5%85%AB%E3%80%81%E5%BE%AA%E7%8E%AF%E7%9B%B8%E5%85%B3%E8%AF%AD%E5%8F%A5-%E7%BB%83%E4%B9%A0%E9%A2%98"><span class="nav-number">3.</span> <span class="nav-text">十八、循环相关语句-练习题</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%8D%81%E4%B9%9D%E3%80%81Random-%E7%94%9F%E6%88%90%E9%9A%8F%E6%9C%BA%E6%95%B0"><span class="nav-number">4.</span> <span class="nav-text">十九、Random-生成随机数</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-%E4%BD%BF%E7%94%A8%E6%AD%A5%E9%AA%A4"><span class="nav-number">4.1.</span> <span class="nav-text">1. 使用步骤</span></a></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Tony Stark"
+      src="/images/avatar.jpg">
+  <p class="site-author-name" itemprop="name">Tony Stark</p>
+  <div class="site-description" itemprop="description">程序员小新儿</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">25</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">8</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">7</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/Crush0321" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;Crush0321" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://weibo.com/Crush_0321" title="Weibo → https:&#x2F;&#x2F;weibo.com&#x2F;Crush_0321" rel="noopener" target="_blank"><i class="fab fa-weibo fa-fw"></i>Weibo</a>
+      </span>
+  </div>
+
+
+  <div class="links-of-blogroll motion-element">
+    <div class="links-of-blogroll-title"><i class="fa fa-link fa-fw"></i>
+      Links
+    </div>
+    <ul class="links-of-blogroll-list">
+        <li class="links-of-blogroll-item">
+          <a href="https://blog.k8s.li/" title="https:&#x2F;&#x2F;blog.k8s.li&#x2F;" rel="noopener" target="_blank">Reimu's blog</a>
+        </li>
+    </ul>
+  </div>
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2022</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Tony Stark</span>
+</div>
+
+<!--隐藏网页底部 powered By Hexo / 强力驱动
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> 强力驱动
+  </div> -->
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+
+</body>
+</html>

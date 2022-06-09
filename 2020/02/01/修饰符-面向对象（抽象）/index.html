@@ -1,0 +1,566 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 6.2.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon32.ico">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon16.ico">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"example.com","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":true},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
+  </script>
+
+  <meta name="description" content="二十八、修饰符1. 包和权限修饰符1.1 包​        包其实就是文件夹，用来管理我们的类的。一个类的全类名其实是包名加类名（在java中要求全类名是不能重复的）。 1.1.1 包的定义格式​		在类的最上面加上 package 包名; 例如 1package com.sangeng;  1.1.2 导包​		当我们在一个类中使用另外一个类的时候，如果这个类在另外一个包下。我们必须要写全类名">
+<meta property="og:type" content="article">
+<meta property="og:title" content="修饰符,面向对象（抽象）">
+<meta property="og:url" content="http://example.com/2020/02/01/%E4%BF%AE%E9%A5%B0%E7%AC%A6-%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%EF%BC%88%E6%8A%BD%E8%B1%A1%EF%BC%89/index.html">
+<meta property="og:site_name" content="Crush&#39;s Blog">
+<meta property="og:description" content="二十八、修饰符1. 包和权限修饰符1.1 包​        包其实就是文件夹，用来管理我们的类的。一个类的全类名其实是包名加类名（在java中要求全类名是不能重复的）。 1.1.1 包的定义格式​		在类的最上面加上 package 包名; 例如 1package com.sangeng;  1.1.2 导包​		当我们在一个类中使用另外一个类的时候，如果这个类在另外一个包下。我们必须要写全类名">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="d:/study/java/java基础讲义/img/image-20201018110217344.png">
+<meta property="article:published_time" content="2020-02-01T10:45:59.000Z">
+<meta property="article:modified_time" content="2022-06-09T10:46:57.702Z">
+<meta property="article:author" content="Tony Stark">
+<meta property="article:tag" content="java">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="d:/study/java/java基础讲义/img/image-20201018110217344.png">
+
+<link rel="canonical" href="http://example.com/2020/02/01/%E4%BF%AE%E9%A5%B0%E7%AC%A6-%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%EF%BC%88%E6%8A%BD%E8%B1%A1%EF%BC%89/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title>修饰符,面向对象（抽象） | Crush's Blog</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">Crush's Blog</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">越努力，越幸运！</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签<span class="badge">7</span></a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类<span class="badge">8</span></a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档<span class="badge">25</span></a>
+
+  </li>
+  </ul>
+</nav>
+
+
+
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2020/02/01/%E4%BF%AE%E9%A5%B0%E7%AC%A6-%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%EF%BC%88%E6%8A%BD%E8%B1%A1%EF%BC%89/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.jpg">
+      <meta itemprop="name" content="Tony Stark">
+      <meta itemprop="description" content="程序员小新儿">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Crush's Blog">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          修饰符,面向对象（抽象）
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2020-02-01 18:45:59" itemprop="dateCreated datePublished" datetime="2020-02-01T18:45:59+08:00">2020-02-01</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2022-06-09 18:46:57" itemprop="dateModified" datetime="2022-06-09T18:46:57+08:00">2022-06-09</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Java%E5%9F%BA%E7%A1%80/" itemprop="url" rel="index"><span itemprop="name">Java基础</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h1 id="二十八、修饰符"><a href="#二十八、修饰符" class="headerlink" title="二十八、修饰符"></a>二十八、修饰符</h1><h2 id="1-包和权限修饰符"><a href="#1-包和权限修饰符" class="headerlink" title="1. 包和权限修饰符"></a>1. 包和权限修饰符</h2><h3 id="1-1-包"><a href="#1-1-包" class="headerlink" title="1.1 包"></a>1.1 包</h3><p>​        包其实就是文件夹，用来管理我们的类的。一个类的全类名其实是包名加类名（在java中要求全类名是不能重复的）。</p>
+<h4 id="1-1-1-包的定义格式"><a href="#1-1-1-包的定义格式" class="headerlink" title="1.1.1 包的定义格式"></a>1.1.1 包的定义格式</h4><p>​		在类的最上面加上 package 包名;</p>
+<p>例如</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> com.sangeng;</span><br></pre></td></tr></table></figure>
+
+<h4 id="1-1-2-导包"><a href="#1-1-2-导包" class="headerlink" title="1.1.2 导包"></a>1.1.2 导包</h4><p>​		当我们在一个类中使用另外一个类的时候，如果这个类在另外一个包下。我们必须要写全类名或者导包（如果是在java.lang包下的类我们也不需要）。</p>
+<p>格式：import 全类名;<br>例如</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> java.util.Scanner;</span><br></pre></td></tr></table></figure>
+
+<h3 id="1-2-权限修饰符"><a href="#1-2-权限修饰符" class="headerlink" title="1.2 权限修饰符"></a>1.2 权限修饰符</h3><p>​	我们使用权限修饰符来控制被修饰的成员的使用权限。Java中有四种权限修饰符：public，protected，default（default并不是关键字，而是代表不写权限修饰符），private</p>
+<h4 id="1-2-1-权限"><a href="#1-2-1-权限" class="headerlink" title="1.2.1 权限"></a>1.2.1 权限</h4><p>​	被不同的权限修饰符修饰后，被修饰的成员可以在不同范围内被使用。</p>
+<table>
+<thead>
+<tr>
+<th></th>
+<th align="center">本类中</th>
+<th align="center">同一个包下</th>
+<th align="center">子类</th>
+<th align="center">不同包非子类</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>public</td>
+<td align="center">√</td>
+<td align="center">√</td>
+<td align="center">√</td>
+<td align="center">√</td>
+</tr>
+<tr>
+<td>protected</td>
+<td align="center">√</td>
+<td align="center">√</td>
+<td align="center">√</td>
+<td align="center"></td>
+</tr>
+<tr>
+<td>默认</td>
+<td align="center">√</td>
+<td align="center">√</td>
+<td align="center"></td>
+<td align="center"></td>
+</tr>
+<tr>
+<td>private</td>
+<td align="center">√</td>
+<td align="center"></td>
+<td align="center"></td>
+<td align="center"></td>
+</tr>
+</tbody></table>
+<h4 id="1-2-2-使用规律总结"><a href="#1-2-2-使用规律总结" class="headerlink" title="1.2.2 使用规律总结"></a>1.2.2 使用规律总结</h4><p>​	我们在工作中一般不使用默认的权限。如果一个成员我们只想在本类中使用我们就使用private修饰。如果我们想只被本类和子类使用可以使用protected。如果可以被人任意使用，我们使用public。</p>
+<h2 id="2-static"><a href="#2-static" class="headerlink" title="2. static"></a>2. static</h2><p>​	static是一个修饰符，被其修饰的成员就属于类了。会被类的所有对象所共享。</p>
+<h3 id="2-1-静态成员的调用格式"><a href="#2-1-静态成员的调用格式" class="headerlink" title="2.1 静态成员的调用格式"></a>2.1 静态成员的调用格式</h3><p>​	无论是成员变量，还是成员方法。用static修饰后我们即可以用对象名来调用也可以用类名来调用。一般都使用类名称进行调用。</p>
+<p>​	静态变量：<strong>类名.静态变量名</strong><br>​	静态方法：<strong>类名.静态方法名(参数)</strong></p>
+<p>例如</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Student</span>&#123;</span><br><span class="line">	<span class="keyword">public</span> <span class="keyword">static</span> <span class="type">int</span> num;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">test</span><span class="params">()</span>&#123;&#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">class</span> <span class="title class_">Demo</span>&#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span>&#123;</span><br><span class="line">        Student.num = <span class="number">10</span>;</span><br><span class="line">        Student.test();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="2-2-注意事项"><a href="#2-2-注意事项" class="headerlink" title="2.2 注意事项"></a>2.2 注意事项</h3><p>​	1.静态方法中不能直接使用非静态的成员 </p>
+<p>​	2.静态方法中不能使用this</p>
+<h3 id="2-3-理解"><a href="#2-3-理解" class="headerlink" title="2.3 理解"></a>2.3 理解</h3><p>​	因为被static修饰的东西就属于类了,所以可以使用<strong>类名</strong>来调用<br>​	因为被static修饰的东西就属于类了,类的加载优先于对象,所以在静态方法中,不能使用非静态的成员(PS:非静态的成员是属于对象),类出现的时候对象还不存在,所以不能使用还不存在的东西<br>​	因为被static修饰的东西就属于类了,而this代表的某个对象,类加载的时候对象还没创建,所以在静态方法中不能使用this,因为对象都没有出现呢</p>
+<h3 id="2-4-使用场景"><a href="#2-4-使用场景" class="headerlink" title="2.4 使用场景"></a>2.4 使用场景</h3><p>​	①如果需要共享数据,可以使用static<br>​	<strong>②如果想要方便调用某些成员,可以使用static修饰</strong>(PS:因为就可以直接用类名来调用,不需要创建对象)</p>
+<h2 id="3-final"><a href="#3-final" class="headerlink" title="3. final"></a>3. final</h2><p>​	final可以修饰类，成员方法，局部变量，成员变量。</p>
+<p>​	修饰后的作用如下：<br>​		①可以修饰类,被final修饰的类<strong>不能被继承</strong>.<br>​		②可以修饰成员方法,被final修饰的成员方法<strong>不能被重写</strong><br>​		③可以修饰局部变量,被final修饰的局部变量<strong>就变成了常量</strong>，赋值之后就<strong>不能被修改</strong><br>​        ④可以修饰成员变量,被final修饰的成员变量<strong>就变成了常量</strong>,一旦赋值之后就<strong>不能被修改</strong>.并且必须初始化。有两种初始化方式，一种是<strong>直接赋值</strong>，另外一种是要在类的<strong>所有的构造方法中对其进行赋值.</strong></p>
+<h1 id="二十九、面向对象-抽象类"><a href="#二十九、面向对象-抽象类" class="headerlink" title="二十九、面向对象-抽象类"></a>二十九、面向对象-抽象类</h1><h2 id="1-为什么要抽象"><a href="#1-为什么要抽象" class="headerlink" title="1. 为什么要抽象"></a>1. 为什么要抽象</h2><p>​	当一个类中有一个方法,这个方法在不同的子类中有不同的实现的时候,在父类中我们没有办法去写具体的方法体,这个时候就可以使用抽象.(即不写方法体)</p>
+<h2 id="2-抽象类和抽象方法的格式"><a href="#2-抽象类和抽象方法的格式" class="headerlink" title="2. 抽象类和抽象方法的格式"></a>2. 抽象类和抽象方法的格式</h2><h3 id="2-1-抽象方法"><a href="#2-1-抽象方法" class="headerlink" title="2.1 抽象方法"></a>2.1 抽象方法</h3><p>​	在成员方法的返回值类型前加<font color='red'>abstract</font>修饰，然后<font color='red'>去掉方法的大括号</font>,加上一个<font color='red'>分号</font>。</p>
+<p>例如</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">abstract</span> <span class="keyword">void</span> <span class="title function_">eat</span><span class="params">()</span>;</span><br></pre></td></tr></table></figure>
+
+<h3 id="2-2-抽象类"><a href="#2-2-抽象类" class="headerlink" title="2.2 抽象类"></a>2.2 抽象类</h3><p>​	在class关键字的前面加上<font color='red'> abstract </font>修饰。</p>
+<p>例如</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">abstract</span> <span class="keyword">class</span> <span class="title class_">Animal</span>&#123;</span><br><span class="line">    </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="3-抽象类的特点"><a href="#3-抽象类的特点" class="headerlink" title="3.  抽象类的特点"></a>3.  抽象类的特点</h2><ul>
+<li>抽象类可以有抽象方法，还有就是不能直接创建对象，其他所有都和普通类一样</li>
+<li>抽象类的子类，要么重写抽象父类中所有的抽象方法，要么子类本身也是一个抽象类</li>
+</ul>
+<h1 id="面向对象-接口"><a href="#面向对象-接口" class="headerlink" title="面向对象-接口"></a>面向对象-接口</h1><h2 id="1-接口的概念"><a href="#1-接口的概念" class="headerlink" title="1. 接口的概念"></a>1. 接口的概念</h2><p>​	接口就是规范\规则，我们可以使用接口来定义一些规则（比如要求某个方法的方法名必须叫什么，方法的参数列表必须是什么，方法的返回值类型必须是什么）</p>
+<p>​	现实生活中的规范</p>
+<p><img src="D:/study/java/java基础讲义/img/image-20201018110217344.png" alt="image-20201018110217344"></p>
+<h2 id="2-接口的格式"><a href="#2-接口的格式" class="headerlink" title="2. 接口的格式"></a>2. 接口的格式</h2><h3 id="2-1-定义接口"><a href="#2-1-定义接口" class="headerlink" title="2.1 定义接口"></a>2.1 定义接口</h3><p>​	使用interface来定义接口</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> interface 接口名&#123;</span><br><span class="line">    <span class="comment">//定义抽象方法</span></span><br><span class="line">    <span class="keyword">void</span> <span class="title function_">method</span><span class="params">()</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="2-2-实现接口"><a href="#2-2-实现接口" class="headerlink" title="2.2 实现接口"></a>2.2 实现接口</h3><p>​	在要实现接口的类名后面加上<font color='red'>implements 接口名</font>。如果要实现多个接口，多个接口名用逗号分开。我们在理解的时候可以把接口理解成是一个特殊的父类。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> class 类名 implements 接口名&#123;&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="3-接口中的成员"><a href="#3-接口中的成员" class="headerlink" title="3. 接口中的成员"></a>3. 接口中的成员</h2><h3 id="3-1-常用成员"><a href="#3-1-常用成员" class="headerlink" title="3.1 常用成员"></a>3.1 常用成员</h3><p>​	在jdk7版本中接口中只能有常量和抽象方法。</p>
+<p>​	我们接口中定义不了成员变量。因为定义的成员变量默认都会修饰为：public static final</p>
+<p>​	我们在接口中定义的方法默认修饰符为public abstract</p>
+<p>例子</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">interface</span> <span class="title class_">InterfaceA</span> &#123;</span><br><span class="line">    <span class="comment">//常量</span></span><br><span class="line">    <span class="type">int</span> <span class="variable">NUM</span> <span class="operator">=</span><span class="number">10</span>;<span class="comment">//等价于public static final int NUM =10;</span></span><br><span class="line">    <span class="comment">//抽象方法</span></span><br><span class="line">    <span class="keyword">void</span> <span class="title function_">method</span><span class="params">()</span>;<span class="comment">//等价于  public abstract void method();</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="3-2-新增成员"><a href="#3-2-新增成员" class="headerlink" title="3.2 新增成员"></a>3.2 新增成员</h3><p>​	在新版本的jdk中接口中允许出现更多的成员。</p>
+<h4 id="3-2-1-默认方法"><a href="#3-2-1-默认方法" class="headerlink" title="3.2.1 默认方法"></a>3.2.1 默认方法</h4><p>​	在jdk8中允许我们在接口中定义默认方法。默认方法允许有方法体。</p>
+<p>​	默认方法可以选择不进行重写。</p>
+<h5 id="3-2-1-1-格式"><a href="#3-2-1-1-格式" class="headerlink" title="3.2.1.1 格式"></a>3.2.1.1 格式</h5><p>​	使用defaut关键字进行修饰。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">interface</span> <span class="title class_">InterfaceA</span> &#123;</span><br><span class="line">	<span class="comment">//默认方法</span></span><br><span class="line">    <span class="keyword">default</span> <span class="keyword">void</span> <span class="title function_">method</span><span class="params">()</span>&#123;</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h5 id="3-2-1-2-注意事项"><a href="#3-2-1-2-注意事项" class="headerlink" title="3.2.1.2 注意事项"></a>3.2.1.2 注意事项</h5><p>​	如果两个接口中有相同的默认方法。一个类同时实现了这两个接口，必须要重写该方法。</p>
+<h5 id="3-2-1-3-应用场景"><a href="#3-2-1-3-应用场景" class="headerlink" title="3.2.1.3 应用场景"></a>3.2.1.3 应用场景</h5><p>​	如果在接口升级的时候某些方法并不想让所有的实现类进行重写，可以使用默认方法来定义。</p>
+<h4 id="3-2-2-静态方法"><a href="#3-2-2-静态方法" class="headerlink" title="3.2.2 静态方法"></a>3.2.2 静态方法</h4><p>​	在jdk8中允许我们在接口中定义静态方法。静态方法允许有方法体。</p>
+<p>​	静态方法不能被重写。</p>
+<h5 id="3-2-2-1-格式"><a href="#3-2-2-1-格式" class="headerlink" title="3.2.2.1 格式"></a>3.2.2.1 格式</h5><p>​	使用static关键字进行修饰。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">interface</span> <span class="title class_">InterfaceA</span> &#123;</span><br><span class="line">	<span class="comment">//静态方法</span></span><br><span class="line">    <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">staticMethod</span><span class="params">()</span>&#123;</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">Demo</span> &#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span> &#123;</span><br><span class="line">        <span class="comment">//使用接口名.方法名(参数)  来调用</span></span><br><span class="line">        InterfaceA.staticMethod();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h5 id="3-2-2-2-应用场景"><a href="#3-2-2-2-应用场景" class="headerlink" title="3.2.2.2 应用场景"></a>3.2.2.2 应用场景</h5><p>​	如果在接口升级的时候需要给接口增加一些工具方法。不想让实现类去重写该方法，可以使用静态方法来定义。</p>
+<h4 id="3-2-3-私有方法"><a href="#3-2-3-私有方法" class="headerlink" title="3.2.3 私有方法"></a>3.2.3 私有方法</h4><p>​	在jdk9中允许我们在接口中定义私有方法。私有方法允许有方法体。</p>
+<p>​	私有方法不可以被重写。</p>
+<h5 id="3-2-3-1-格式"><a href="#3-2-3-1-格式" class="headerlink" title="3.2.3.1 格式"></a>3.2.3.1 格式</h5><p>​	使用private进行修饰。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">interface</span> <span class="title class_">InterfaceA</span> &#123;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">privateStaticMethod</span><span class="params">()</span>&#123;</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">private</span>  <span class="keyword">void</span> <span class="title function_">privateMethod</span><span class="params">()</span>&#123;</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h5 id="3-2-3-2-应用场景"><a href="#3-2-3-2-应用场景" class="headerlink" title="3.2.3.2 应用场景"></a>3.2.3.2 应用场景</h5><p>​	对默认方法或者是静态方法中重复的代码进行抽取，提高代码复用度。</p>
+<h2 id="4-继承实现关系"><a href="#4-继承实现关系" class="headerlink" title="4. 继承实现关系"></a>4. 继承实现关系</h2><p>​	在java中一个类可以实现多个接口</p>
+<p>例如</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">Person</span> <span class="keyword">implements</span> <span class="title class_">InterfaceA</span>,InterfaceB&#123;&#125;</span><br></pre></td></tr></table></figure>
+
+<p>​	在java中接口和接口之间可以有继承关系。继承之后会把父接口的成员继承下来。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">interface</span> <span class="title class_">InterfaceC</span>  <span class="keyword">extends</span> <span class="title class_">InterfaceA</span>&#123;</span><br><span class="line"><span class="comment">//    void method1();</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="5-抽象类和接口的使用区别"><a href="#5-抽象类和接口的使用区别" class="headerlink" title="5. 抽象类和接口的使用区别"></a>5. 抽象类和接口的使用区别</h2><p>​	接口中的基本都是抽象的，而在抽象类中可以有一部分是非抽象方法。而非抽象类中是不可以有抽象方法的。</p>
+<p>​	我们就发现接口是最抽象的，其次是抽象类，最后是非抽象类。<br>​	所以我们最顶层设计成接口，然后实现类设计成抽象类（实现部分抽象方法），抽象类的子类可以设计成非抽象类（对剩下的所有抽象方法进行实现）。</p>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/java/" rel="tag"># java</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2020/02/01/%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%EF%BC%88%E7%BB%A7%E6%89%BF-%E5%A4%9A%E6%80%81%EF%BC%89/" rel="prev" title="面向对象（继承,多态）">
+      <i class="fa fa-chevron-left"></i> 面向对象（继承,多态）
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2020/05/09/Java-SE%E8%BF%9B%E9%98%B6%E4%B9%8B%E5%B8%B8%E8%A7%81%E7%B1%BB/" rel="next" title="Java SE进阶之常见类">
+      Java SE进阶之常见类 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E4%BA%8C%E5%8D%81%E5%85%AB%E3%80%81%E4%BF%AE%E9%A5%B0%E7%AC%A6"><span class="nav-number">1.</span> <span class="nav-text">二十八、修饰符</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-%E5%8C%85%E5%92%8C%E6%9D%83%E9%99%90%E4%BF%AE%E9%A5%B0%E7%AC%A6"><span class="nav-number">1.1.</span> <span class="nav-text">1. 包和权限修饰符</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-1-%E5%8C%85"><span class="nav-number">1.1.1.</span> <span class="nav-text">1.1 包</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1-1-1-%E5%8C%85%E7%9A%84%E5%AE%9A%E4%B9%89%E6%A0%BC%E5%BC%8F"><span class="nav-number">1.1.1.1.</span> <span class="nav-text">1.1.1 包的定义格式</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#1-1-2-%E5%AF%BC%E5%8C%85"><span class="nav-number">1.1.1.2.</span> <span class="nav-text">1.1.2 导包</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-2-%E6%9D%83%E9%99%90%E4%BF%AE%E9%A5%B0%E7%AC%A6"><span class="nav-number">1.1.2.</span> <span class="nav-text">1.2 权限修饰符</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1-2-1-%E6%9D%83%E9%99%90"><span class="nav-number">1.1.2.1.</span> <span class="nav-text">1.2.1 权限</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#1-2-2-%E4%BD%BF%E7%94%A8%E8%A7%84%E5%BE%8B%E6%80%BB%E7%BB%93"><span class="nav-number">1.1.2.2.</span> <span class="nav-text">1.2.2 使用规律总结</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-static"><span class="nav-number">1.2.</span> <span class="nav-text">2. static</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#2-1-%E9%9D%99%E6%80%81%E6%88%90%E5%91%98%E7%9A%84%E8%B0%83%E7%94%A8%E6%A0%BC%E5%BC%8F"><span class="nav-number">1.2.1.</span> <span class="nav-text">2.1 静态成员的调用格式</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-2-%E6%B3%A8%E6%84%8F%E4%BA%8B%E9%A1%B9"><span class="nav-number">1.2.2.</span> <span class="nav-text">2.2 注意事项</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-3-%E7%90%86%E8%A7%A3"><span class="nav-number">1.2.3.</span> <span class="nav-text">2.3 理解</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-4-%E4%BD%BF%E7%94%A8%E5%9C%BA%E6%99%AF"><span class="nav-number">1.2.4.</span> <span class="nav-text">2.4 使用场景</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-final"><span class="nav-number">1.3.</span> <span class="nav-text">3. final</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E4%BA%8C%E5%8D%81%E4%B9%9D%E3%80%81%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1-%E6%8A%BD%E8%B1%A1%E7%B1%BB"><span class="nav-number">2.</span> <span class="nav-text">二十九、面向对象-抽象类</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-%E4%B8%BA%E4%BB%80%E4%B9%88%E8%A6%81%E6%8A%BD%E8%B1%A1"><span class="nav-number">2.1.</span> <span class="nav-text">1. 为什么要抽象</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-%E6%8A%BD%E8%B1%A1%E7%B1%BB%E5%92%8C%E6%8A%BD%E8%B1%A1%E6%96%B9%E6%B3%95%E7%9A%84%E6%A0%BC%E5%BC%8F"><span class="nav-number">2.2.</span> <span class="nav-text">2. 抽象类和抽象方法的格式</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#2-1-%E6%8A%BD%E8%B1%A1%E6%96%B9%E6%B3%95"><span class="nav-number">2.2.1.</span> <span class="nav-text">2.1 抽象方法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-2-%E6%8A%BD%E8%B1%A1%E7%B1%BB"><span class="nav-number">2.2.2.</span> <span class="nav-text">2.2 抽象类</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-%E6%8A%BD%E8%B1%A1%E7%B1%BB%E7%9A%84%E7%89%B9%E7%82%B9"><span class="nav-number">2.3.</span> <span class="nav-text">3.  抽象类的特点</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1-%E6%8E%A5%E5%8F%A3"><span class="nav-number">3.</span> <span class="nav-text">面向对象-接口</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-%E6%8E%A5%E5%8F%A3%E7%9A%84%E6%A6%82%E5%BF%B5"><span class="nav-number">3.1.</span> <span class="nav-text">1. 接口的概念</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-%E6%8E%A5%E5%8F%A3%E7%9A%84%E6%A0%BC%E5%BC%8F"><span class="nav-number">3.2.</span> <span class="nav-text">2. 接口的格式</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#2-1-%E5%AE%9A%E4%B9%89%E6%8E%A5%E5%8F%A3"><span class="nav-number">3.2.1.</span> <span class="nav-text">2.1 定义接口</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-2-%E5%AE%9E%E7%8E%B0%E6%8E%A5%E5%8F%A3"><span class="nav-number">3.2.2.</span> <span class="nav-text">2.2 实现接口</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-%E6%8E%A5%E5%8F%A3%E4%B8%AD%E7%9A%84%E6%88%90%E5%91%98"><span class="nav-number">3.3.</span> <span class="nav-text">3. 接口中的成员</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#3-1-%E5%B8%B8%E7%94%A8%E6%88%90%E5%91%98"><span class="nav-number">3.3.1.</span> <span class="nav-text">3.1 常用成员</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-2-%E6%96%B0%E5%A2%9E%E6%88%90%E5%91%98"><span class="nav-number">3.3.2.</span> <span class="nav-text">3.2 新增成员</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#3-2-1-%E9%BB%98%E8%AE%A4%E6%96%B9%E6%B3%95"><span class="nav-number">3.3.2.1.</span> <span class="nav-text">3.2.1 默认方法</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#3-2-1-1-%E6%A0%BC%E5%BC%8F"><span class="nav-number">3.3.2.1.1.</span> <span class="nav-text">3.2.1.1 格式</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#3-2-1-2-%E6%B3%A8%E6%84%8F%E4%BA%8B%E9%A1%B9"><span class="nav-number">3.3.2.1.2.</span> <span class="nav-text">3.2.1.2 注意事项</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#3-2-1-3-%E5%BA%94%E7%94%A8%E5%9C%BA%E6%99%AF"><span class="nav-number">3.3.2.1.3.</span> <span class="nav-text">3.2.1.3 应用场景</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#3-2-2-%E9%9D%99%E6%80%81%E6%96%B9%E6%B3%95"><span class="nav-number">3.3.2.2.</span> <span class="nav-text">3.2.2 静态方法</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#3-2-2-1-%E6%A0%BC%E5%BC%8F"><span class="nav-number">3.3.2.2.1.</span> <span class="nav-text">3.2.2.1 格式</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#3-2-2-2-%E5%BA%94%E7%94%A8%E5%9C%BA%E6%99%AF"><span class="nav-number">3.3.2.2.2.</span> <span class="nav-text">3.2.2.2 应用场景</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#3-2-3-%E7%A7%81%E6%9C%89%E6%96%B9%E6%B3%95"><span class="nav-number">3.3.2.3.</span> <span class="nav-text">3.2.3 私有方法</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#3-2-3-1-%E6%A0%BC%E5%BC%8F"><span class="nav-number">3.3.2.3.1.</span> <span class="nav-text">3.2.3.1 格式</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#3-2-3-2-%E5%BA%94%E7%94%A8%E5%9C%BA%E6%99%AF"><span class="nav-number">3.3.2.3.2.</span> <span class="nav-text">3.2.3.2 应用场景</span></a></li></ol></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4-%E7%BB%A7%E6%89%BF%E5%AE%9E%E7%8E%B0%E5%85%B3%E7%B3%BB"><span class="nav-number">3.4.</span> <span class="nav-text">4. 继承实现关系</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#5-%E6%8A%BD%E8%B1%A1%E7%B1%BB%E5%92%8C%E6%8E%A5%E5%8F%A3%E7%9A%84%E4%BD%BF%E7%94%A8%E5%8C%BA%E5%88%AB"><span class="nav-number">3.5.</span> <span class="nav-text">5. 抽象类和接口的使用区别</span></a></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Tony Stark"
+      src="/images/avatar.jpg">
+  <p class="site-author-name" itemprop="name">Tony Stark</p>
+  <div class="site-description" itemprop="description">程序员小新儿</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">25</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">8</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">7</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/Crush0321" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;Crush0321" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://weibo.com/Crush_0321" title="Weibo → https:&#x2F;&#x2F;weibo.com&#x2F;Crush_0321" rel="noopener" target="_blank"><i class="fab fa-weibo fa-fw"></i>Weibo</a>
+      </span>
+  </div>
+
+
+  <div class="links-of-blogroll motion-element">
+    <div class="links-of-blogroll-title"><i class="fa fa-link fa-fw"></i>
+      Links
+    </div>
+    <ul class="links-of-blogroll-list">
+        <li class="links-of-blogroll-item">
+          <a href="https://blog.k8s.li/" title="https:&#x2F;&#x2F;blog.k8s.li&#x2F;" rel="noopener" target="_blank">Reimu's blog</a>
+        </li>
+    </ul>
+  </div>
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2022</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Tony Stark</span>
+</div>
+
+<!--隐藏网页底部 powered By Hexo / 强力驱动
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> 强力驱动
+  </div> -->
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+
+</body>
+</html>
